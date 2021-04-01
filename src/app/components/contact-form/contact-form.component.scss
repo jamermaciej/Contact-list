@@ -1,0 +1,43 @@
+mat-form-field {
+    width: 100%;
+}
+
+.dateOfBirth-field {
+    ::ng-deep {
+        .mat-form-field-flex {
+            background-color: transparent;
+            padding-left: 0;
+        }
+    }
+}
+
+.file-uplaod {
+    position: relative;
+    margin: 0 0 20px;
+
+    .mat-toolbar {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        height: unset;
+        min-height: 100px;
+        justify-content: space-between;
+
+        .image-preview {
+            max-width: 100px;
+
+            img {
+                width: 100px;
+            }
+        }
+    }
+
+    #uploadFile {
+        display: none;
+    }
+}
+
+.btn-row {
+    button {
+        margin: 15px 25px;
+    }
+}

@@ -1,0 +1,24 @@
+img {
+    max-width: 50px;
+    padding: 10px 0;
+}
+
+.mat-column-photoUrl {
+    flex: 0 0 100px;
+}
+
+.mat-column-actions {
+    flex: 0 0 100px;
+}
+
+mat-icon {
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.empty-list {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 22px;
+    font-weight: 700;
+}

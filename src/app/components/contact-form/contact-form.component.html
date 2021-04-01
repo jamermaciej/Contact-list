@@ -1,0 +1,40 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Imię *</mat-label>
+    <input type="text" name="name" matInput formControlName="name">
+    <mat-error *ngIf="contactForm.get('name').hasError('required')">
+      Imię jest wymagane
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Nazwisko *</mat-label>
+    <input type="text" name="surname" matInput formControlName="surname">
+    <mat-error *ngIf="contactForm.get('surname').hasError('required')">
+      Nazwisko jest wymagane
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="dateOfBirth-field">
+    <mat-label>Data urodzenia</mat-label>
+    <input matInput [matDatepicker]="dateOfBirth" [max]="today" formControlName="dateOfBirth">
+    <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+    <mat-datepicker #dateOfBirth></mat-datepicker>
+    <mat-error *ngIf="contactForm.get('dateOfBirth').hasError('required')">
+      Data urodzenia jest wymagana
+    </mat-error>
+  </mat-form-field>
+  <div class="file-uplaod">
+    <mat-toolbar>
+      <div class="image-preview">
+        <img [src]="photoUrl">
+      </div>
+      <button type="button" (click)="fileInput.click()" mat-flat-button color="primary">
+        Dodaj zdjęcie
+      </button>
+    </mat-toolbar>
+    <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)" name="uploadFile" accept="image/*" />
+  </div>
+  <div class="btn-row d-flex justify-content-center">
+    <button *ngIf="conatct" type="button" (click)="back()" mat-raised-button color="basic">Powrót</button>
+    <button [disabled]="contactForm.invalid" type="submit" mat-raised-button color="primary">{{ btnLabel }}</button>
+  </div>
+</form>

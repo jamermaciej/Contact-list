@@ -1,0 +1,54 @@
+<mat-card class="contact-list">
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Lista kontaktów</h2>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-container *ngIf="contacts.data.length; else noContacts">
+    <div class="table-filter">
+      <mat-form-field>
+        <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Szukaj">
+      </mat-form-field>
+    </div>
+
+    <mat-table [dataSource]="contacts">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="surname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.surname }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dateOfBirth">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Data urodzenia</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.dateOfBirth | date: 'dd/MM/yyyy' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="photoUrl">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Zdjęcie</mat-header-cell>
+        <mat-cell *matCellDef="let element"><img [src]="element.photoUrl"></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index;">
+          <mat-icon (click)="editContact(element)">edit</mat-icon>
+          <mat-icon color="warn" (click)="removeContact(element.id)">delete</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+</ng-container>
+
+<ng-template #noContacts>
+  <p class="empty-list">Nie masz kontaktów</p>
+</ng-template>
+  </mat-card-content>
+</mat-card>
