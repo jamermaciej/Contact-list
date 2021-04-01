@@ -46,16 +46,14 @@ export class ContactFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.triggerSubmit.emit(this.contactForm.value);
-    this.formDirective.resetForm();
+    if ( this.contactForm.valid ) {
+      this.triggerSubmit.emit(this.contactForm.value);
+      this.formDirective.resetForm();
+    }
   }
 
   uploadFileEvt(imgFile: any) {
     if (imgFile.target.files && imgFile.target.files[0]) {
-      // Array.from(imgFile.target.files).forEach((file: File) => {
-      //   // this.fileAttr += file.name;
-      // });
-
       const reader = new FileReader();
       reader.onload = (e: any) => {
         const image = new Image();

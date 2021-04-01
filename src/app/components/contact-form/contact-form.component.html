@@ -1,4 +1,4 @@
-<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" #ngForm="ngForm">
   <mat-form-field>
     <mat-label>Imię *</mat-label>
     <input type="text" name="name" matInput formControlName="name">
@@ -14,7 +14,7 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill" class="dateOfBirth-field">
-    <mat-label>Data urodzenia</mat-label>
+    <mat-label>Data urodzenia *</mat-label>
     <input matInput [matDatepicker]="dateOfBirth" [max]="today" formControlName="dateOfBirth">
     <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
     <mat-datepicker #dateOfBirth></mat-datepicker>
@@ -32,9 +32,12 @@
       </button>
     </mat-toolbar>
     <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)" name="uploadFile" accept="image/*" />
+    <mat-error *ngIf="ngForm.submitted && contactForm.get('photoUrl').hasError('required')">
+      Zdjęcie jest wymagane
+    </mat-error>
   </div>
   <div class="btn-row d-flex justify-content-center">
     <button *ngIf="conatct" type="button" (click)="back()" mat-raised-button color="basic">Powrót</button>
-    <button [disabled]="contactForm.invalid" type="submit" mat-raised-button color="primary">{{ btnLabel }}</button>
+    <button type="submit" mat-raised-button color="primary">{{ btnLabel }}</button>
   </div>
 </form>

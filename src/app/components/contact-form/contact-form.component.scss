@@ -8,12 +8,16 @@ mat-form-field {
             background-color: transparent;
             padding-left: 0;
         }
+
+        .mat-form-field-subscript-wrapper {
+            padding: 0;
+        }
     }
 }
 
 .file-uplaod {
     position: relative;
-    margin: 0 0 20px;
+    margin: 20px 0;
 
     .mat-toolbar {
         padding-top: 10px;
@@ -33,6 +37,10 @@ mat-form-field {
 
     #uploadFile {
         display: none;
+    }
+
+    .mat-error {
+        font-size: 10.5px;
     }
 }
 
