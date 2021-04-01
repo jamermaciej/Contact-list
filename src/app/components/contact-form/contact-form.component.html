@@ -37,7 +37,7 @@
     </mat-error>
   </div>
   <div class="btn-row d-flex justify-content-center">
-    <button *ngIf="conatct" type="button" (click)="back()" mat-raised-button color="basic">Powrót</button>
-    <button type="submit" mat-raised-button color="primary">{{ btnLabel }}</button>
+    <button *ngIf="contact" type="button" (click)="back()" mat-raised-button color="basic">Powrót</button>
+    <button [disabled]="!!contact && contactForm.pristine" type="submit" mat-raised-button color="primary">{{ btnLabel }}</button>
   </div>
 </form>

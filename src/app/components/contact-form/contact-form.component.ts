@@ -14,16 +14,16 @@ export class ContactFormComponent implements OnInit {
   today = new Date();
   @ViewChild('fileInput') fileInput: ElementRef;
   btnLabel = 'Dodaj kontakt';
-  private _conatct: Contact;
+  private _contact: Contact;
 
   @Input() set contact(contact: Contact) {
-    this._conatct = contact;
+    this._contact = contact;
     this.btnLabel = 'Edytuj kontakt';
     this.contactForm.patchValue(contact);
   }
 
-  get conatct() {
-    return this._conatct;
+  get contact() {
+    return this._contact;
   }
 
   @Output() triggerSubmit = new EventEmitter();
@@ -61,6 +61,7 @@ export class ContactFormComponent implements OnInit {
         image.onload = rs => {
           const imgBase64Path = e.target.result;
           this.contactForm.get('photoUrl').setValue(imgBase64Path);
+          this.contactForm.get('photoUrl').markAsDirty();
         };
       };
       reader.readAsDataURL(imgFile.target.files[0]);
