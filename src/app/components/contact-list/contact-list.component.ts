@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
 import { ContactsService } from 'src/app/services/contacts.service';
 
@@ -10,15 +10,16 @@ import { ContactsService } from 'src/app/services/contacts.service';
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']
 })
-export class ContactListComponent implements OnInit {
+export class ContactListComponent implements OnInit, OnDestroy {
   contacts$: Observable<Contact[]>;
   displayedColumns = ['name', 'surname', 'dateOfBirth', 'photoUrl', 'actions'];
   contacts = new MatTableDataSource<Contact>();
+  private subscription: Subscription;
 
   constructor(private contactsService: ContactsService, private router: Router) { }
 
   ngOnInit(): void {
-    this.contactsService.getContactListObs().subscribe(contacts => {
+    this.subscription = this.contactsService.getContactListObs().subscribe(contacts => {
       this.contacts.data = contacts;
     });
   }
@@ -33,6 +34,10 @@ export class ContactListComponent implements OnInit {
 
   removeContact(index: number) {
     this.contactsService.removeContact(index);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
